@@ -1,0 +1,1 @@
+## Projeto para testar cenário com a ferramenta playwright, com o site de testes https://magento.softwaretestingboard.com/%27
