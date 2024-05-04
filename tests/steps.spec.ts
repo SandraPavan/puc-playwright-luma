@@ -66,4 +66,25 @@ test.describe("Acessando magento", () => {
         await page.getByRole('button', { name: 'Sign In' }).click();      
         const result = await page.getByText ('The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later.').textContent();      
     });
+
+    test('Deve fazer o login e adicionar um produto aos favoritos', async () => {
+        await page.goto('https://magento.softwaretestingboard.com/');
+        await page.getByRole('link', { name: 'Sign In' }).click();
+        await page.getByLabel('Email', { exact: true }).click();
+        await page.getByLabel('Email', { exact: true }).fill('teste@teste.com.br');
+        await page.getByLabel('Email', { exact: true }).press('Tab');
+        await page.getByLabel('Password').fill('Teste123');
+        await page.getByRole('button', { name: 'Sign In' }).click();  
+        await page.goto('https://magento.softwaretestingboard.com/');
+        await page.goto('https://magento.softwaretestingboard.com/radiant-tee.html');
+        await page.getByRole('link', { name: ' Add to Wish List' }).click(); 
+    });
+
+    test('Deve adicionar produtos para comparar', async () => {
+        await page.goto('https://magento.softwaretestingboard.com/');
+        await page.getByRole('link', { name: 'Breathe-Easy Tank' }).first().click();
+        await page.getByRole('link', { name: ' Add to Compare' }).click();
+        await page.getByRole('link', { name: 'Gabrielle Micro Sleeve Top' }).first().click();
+        await page.getByRole('link', { name: ' Add to Compare' }).click();
+    });
 })
