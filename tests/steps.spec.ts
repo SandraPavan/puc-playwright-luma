@@ -87,4 +87,20 @@ test.describe("Acessando magento", () => {
         await page.getByRole('link', { name: 'Gabrielle Micro Sleeve Top' }).first().click();
         await page.getByRole('link', { name: ' Add to Compare' }).click();
     });
+
+    test('Deve acessar o departamento dos banners', async () => {
+        await page.goto('https://magento.softwaretestingboard.com/');
+        await page.getByRole('link', { name: 'New Luma Yoga Collection Get' }).click();
+        await expect(page.title()).resolves.toMatch("New Luma Yoga Collection");
+    });
+
+    test('Não deve permitir o cadastro de uma order aleatória', async () => {
+        await page.goto('https://magento.softwaretestingboard.com/');
+        await page.getByRole('link', { name: 'Orders and Returns' }).click();
+        await page.getByLabel('Order ID', { exact: true }).fill('Teste123');
+        await page.getByLabel('Billing Last Name', { exact: true }).fill('teste1234');
+        await page.getByLabel('Email', { exact: true }).fill('teste@teste.com.br');
+        await page.getByRole('button', { name: 'Continue' }).click();
+        const result = await page.getByText ('You entered incorrect data. Please try again.').textContent();      
+    });
 })
