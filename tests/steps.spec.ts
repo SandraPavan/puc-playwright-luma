@@ -67,7 +67,7 @@ test.describe("Acessando magento", () => {
         const result = await page.getByText ('The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later.').textContent();      
     });
 
-    test('Deve fazer o login e adicionar um produto aos favoritos', async () => {
+    test('Deve adicionar um produto aos favoritos', async () => {
         await page.goto('https://magento.softwaretestingboard.com/');
         await page.getByRole('link', { name: 'Sign In' }).click();
         await page.getByLabel('Email', { exact: true }).click();
